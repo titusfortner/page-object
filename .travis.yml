@@ -12,5 +12,6 @@ before_script:
   - support/travis.sh
   - export PATH=$PWD/chrome-linux:$PATH
   - export CHROME_BINARY=$PWD/chrome-linux/chrome
+  - $CHROME_BINARY --version
   - chromedriver --version
 script: bundle exec rake features:watir_webdriver
