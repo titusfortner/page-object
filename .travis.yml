@@ -1,24 +1,19 @@
-sudo: false
+sudo: required
 language: ruby
 cache: bundler
 rvm:
-  - 2.3.1
-addons:
-  firefox: latest
+  - 2.2.5
 before_script:
   - sh -e /etc/init.d/xvfb start
-  - mkdir travis-drivers
-  - export PATH=$PWD/travis-drivers:$PATH
+script:
   - |
-      CHROME_REVISION=417841
+      sudo apt-get -y purge chromium-browser
+      export CHROME_REVISION=417841
       curl -L -O "http://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/${CHROME_REVISION}/chrome-linux.zip"
       unzip chrome-linux.zip
-
-      CHROMEDRIVER_VERSION=$(curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+      sudo ln -sf $PWD/chrome-linux/chrome-wrapper /usr/local/bin/chrome
+      export CHROMEDRIVER_VERSION=`curl -s http://chromedriver.storage.googleapis.com/LATEST_RELEASE`
       curl -L -O "http://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-      unzip chromedriver_linux64.zip
-      mv chromedriver travis-drivers/chromedriver
-      chmod +x travis-drivers/chromedriver
-script: bundle exec rake $RAKE_TASK
-env:
-  - RAKE_TASK=features:watir_webdriver
+      unzip chromedriver_linux64.zip && chmod +x chromedriver && sudo mv chromedriver /usr/local/bin
+      chromedriver --version
+      bundle exec rake features:watir_webdriver
