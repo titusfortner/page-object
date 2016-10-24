@@ -9,6 +9,7 @@ addons:
       - libxss1
 cache: bundler
 before_script:
+  - which google-chrome-stable
   - support/travis.sh
   - export PATH=$PWD/chrome-linux:$PATH
   - export CHROME_BINARY=$PWD/chrome-linux/chrome
