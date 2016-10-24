@@ -10,7 +10,9 @@ Bundler::GemHelper.install_tasks
 
 task :temp do
   require 'watir-webdriver'
-  browser = Watir::Browser.new :chrome
+  caps = Selenium::WebDriver::Remote::Capabilities.chrome(chrome_options: {'binary' => ENV['CHROME_BINARY']})
+  browser ||= Watir::Browser.new :chrome, desired_capabilities: caps
+
   browser.goto 'google.com'
   browser.quit
 end
