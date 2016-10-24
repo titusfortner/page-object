@@ -2,10 +2,7 @@ sudo: false
 language: ruby
 cache: bundler
 rvm:
-  - 2.1.9
-  - 2.2.5
   - 2.3.1
-  - jruby
 addons:
   firefox: latest
 before_script:
@@ -37,8 +34,4 @@ before_script:
       fi
 script: bundle exec rake $RAKE_TASK
 env:
-  - RAKE_TASK=spec
   - RAKE_TASK=features:watir_webdriver BROWSER=local_chrome
-  - RAKE_TASK=features:selenium_webdriver BROWSER=local_chrome
-  - RAKE_TASK=features:watir_webdriver BROWSER=local_firefox
-  - RAKE_TASK=features:selenium_webdriver BROWSER=local_firefox
