@@ -12,8 +12,7 @@ module PageObject
           extend Target
         end
         
-        @@browser =  watir_browser(target) if ENV['DRIVER'] == 'WATIR'
-        @@browser =  selenium_browser(target) if ENV['DRIVER'] == 'SELENIUM'
+        @@browser =  ENV['DRIVER'] == 'SELENIUM' ? selenium_browser(target) : watir_browser(target)
       end
       @@browser
     end
