@@ -35,7 +35,7 @@ module PageObject
                            :url => url,
                            :desired_capabilities => desired_capabilities)
       else
-        browser = target.gsub('_local', '').to_sym
+        browser = target.gsub('local_', '').to_sym
         Watir::Browser.new browser, :http_client => client
       end
     end
@@ -47,7 +47,7 @@ module PageObject
                                 :url => url,
                                 :desired_capabilities => desired_capabilities)
       else
-        browser = target.gsub('_local', '').to_sym
+        browser = target.gsub('local_', '').to_sym
         Selenium::WebDriver.for browser, :http_client => client
       end
     end
