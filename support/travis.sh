@@ -17,5 +17,6 @@ sh -e /etc/init.d/xvfb start
   curl -L -O "http://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
   unzip chromedriver_linux64.zip
 
-  mv chromedriver chrome-linux/chromedriver
-  chmod +x chrome-linux/chromedriver
+  mv chromedriver travis-drivers/chromedriver
+  chmod +x travis-drivers/chromedriver
+  chromedriver --version

@@ -9,5 +9,7 @@ addons:
       - libxss1
 cache: bundler
 before_script:
+  - mkdir travis-drivers
+  - export PATH=$PWD/travis-drivers:$PATH
   - support/travis.sh
 script: bundle exec rake features:watir_webdriver
