@@ -4,7 +4,8 @@ module PageObject
   module PersistantBrowser
     @@browser = nil
     def self.get_browser
-      @@browser ||= Watir::Browser.new :chrome
+      caps = Selenium::WebDriver::Remote::Capabilities.chrome(chrome_options: {'binary' => ENV['CHROME_BINARY']})
+      @@browser ||= Watir::Browser.new :chrome, desired_capabilities: caps
     end
     
     def self.quit
