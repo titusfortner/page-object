@@ -11,7 +11,6 @@ addons:
 before_script:
   - sh -e /etc/init.d/xvfb start
   - export PATH=$PWD/travis-drivers:$PATH
-  - support/travis.sh
   - |
       if [[ $BROWSER == *"chrome"* ]]; then
         CHROME_REVISION=`curl -s http://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/LAST_CHANGE`
