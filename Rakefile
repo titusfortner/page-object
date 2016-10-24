@@ -8,11 +8,12 @@ require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 Bundler::GemHelper.install_tasks
 
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/**/*_spec.rb'
+task :temp do
+  require 'watir-webdriver'
+  browser = Watir::Browser.new :chrome
+  browser.goto 'google.com'
+  browser.quit
 end
-task :spec
 
 namespace :features do
   Cucumber::Rake::Task.new(:watir_webdriver, "Run features with Watir") do |t|

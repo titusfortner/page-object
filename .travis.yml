@@ -14,4 +14,4 @@ before_script:
   - export CHROME_BINARY=$PWD/chrome-linux/chrome
   - $CHROME_BINARY --version
   - chromedriver --version
-script: bundle exec rake features:watir_webdriver
+script: bundle exec rake temp
