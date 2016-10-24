@@ -33,6 +33,8 @@ before_script:
         firefox --version
       fi
 
+script: bundle exec rake $RAKE_TASK
+
 env:
   - RAKE_TASK=spec
   - RAKE_TASK=features:watir_webdriver BROWSER=local_chrome
