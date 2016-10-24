@@ -19,4 +19,3 @@ sh -e /etc/init.d/xvfb start
 
   mv chromedriver chrome-linux/chromedriver
   chmod +x chrome-linux/chromedriver
-  chromedriver --version

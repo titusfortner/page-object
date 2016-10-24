@@ -11,4 +11,5 @@ cache: bundler
 before_script:
   - support/travis.sh
   - export PATH=$PWD/chrome-linux:$PATH
+  - chromedriver --version
 script: bundle exec rake features:watir_webdriver
