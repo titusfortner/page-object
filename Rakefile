@@ -8,15 +8,6 @@ require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 Bundler::GemHelper.install_tasks
 
-task :temp do
-  require 'watir-webdriver'
-  #caps = Selenium::WebDriver::Remote::Capabilities.chrome(chrome_options: {'binary' => ENV['CHROME_BINARY']})
-  browser = Watir::Browser.new :chrome#, desired_capabilities: caps
-
-  browser.goto 'google.com'
-  browser.quit
-end
-
 namespace :features do
   Cucumber::Rake::Task.new(:watir_webdriver, "Run features with Watir") do |t|
     t.profile = "watir_webdriver"
