@@ -1,10 +1,21 @@
 require 'selenium/webdriver/remote/http/persistent'
+
 module PageObject
   module PersistantBrowser
     @@browser = nil
     def self.get_browser
-#      caps = Selenium::WebDriver::Remote::Capabilities.chrome(chrome_options: {'binary' => ENV['CHROME_BINARY']})
-      @@browser ||= Watir::Browser.new :chrome#, desired_capabilities: caps
+      @@browser ||= Watir::Browser.new :chrome
+      if !@@browser
+        target = ENV['BROWSER'] || 'local_chrome'
+
+        if is_remote?(target)
+          require File.dirname(__FILE__) + "/targets/#{target}"
+          extend Target
+        end
+
+        @@browser =  ENV['DRIVER'] == 'SELENIUM' ? selenium_browser(target) : watir_browser(target)
+      end
+      @@browser
     end
     
     def self.quit
