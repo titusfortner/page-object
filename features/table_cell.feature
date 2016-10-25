@@ -20,14 +20,6 @@ Feature: Table Cell
     | name      |
     | text      |
     | css       |
-
-  @watir_only
-  Scenario Outline: Locating table cells on the Page with watir
-    When I search for the table cell by "<search_by>"
-    Then the cell data should be 'Data4'
-
-  Scenarios:
-    | search_by |
     | index     |
 
   Scenario Outline: Locating table cell using multiple parameters

@@ -52,14 +52,6 @@ Feature: Button
     | name      |
     | index     |
     | value     |
-
-  @watir_only
-  Scenario Outline: Locating buttons on Watir only
-    When I search for the button by "<search_by>"
-    Then I should be able to click the button
-
-  Scenarios:
-    | search_by |
     | text      |
 
     @dane

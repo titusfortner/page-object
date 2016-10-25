@@ -17,21 +17,12 @@ Feature: Table Row
       | class     |
       | xpath     |
       | css       |
+      | index     |
 
 
-  @watir_only
   Scenario: Locating table rows on the Page by text
     When I search for the table row by "text"
     Then the row data should be 'Data1 Data2'
-
-  @watir_only
-  Scenario Outline: Locating table rows on the Page with watir
-    When I search for the table row by "<search_by>"
-    Then the row data should be 'Data1 Data2'
-
-    Scenarios:
-      | search_by |
-      | index     |
 
   Scenario: Locating table row using multiple parameters
     When I retrieve a table row element by "class" and "index"

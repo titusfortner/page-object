@@ -40,15 +40,16 @@ module PageObject
     end
 
     def self.selenium_browser(target)
-      if is_remote?(target)
-        Selenium::WebDriver.for(:remote,
-                                :http_client => client,
-                                :url => url,
-                                :desired_capabilities => desired_capabilities)
-      else
-        browser = target.gsub('local_', '').to_sym
-        Selenium::WebDriver.for browser, :http_client => client
-      end
+      driver = if is_remote?(target)
+                 Selenium::WebDriver.for(:remote,
+                                         :http_client => client,
+                                         :url => url,
+                                         :desired_capabilities => desired_capabilities)
+               else
+                 browser = target.gsub('local_', '').to_sym
+                 Selenium::WebDriver.for browser, :http_client => client
+               end
+      Watir::Browser.new driver
     end
 
     def self.client

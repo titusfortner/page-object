@@ -11,12 +11,8 @@ Feature: Gxt Table Extension
 
   Scenario: Retrieve a GxtTable
     When I retrieve a GxtTable widget
-    Then I should know it is visible
-
-  @watir_only
-  Scenario: Determine if a GxtTable exists
-    When I retrieve a GxtTable widget
     Then I should know it exists
+    And I should know it is visible
 
   Scenario: Confirm a correct row count from a GxtTable
     When I retrieve a GxtTable widget
