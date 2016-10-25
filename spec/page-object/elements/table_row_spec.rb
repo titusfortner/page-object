@@ -11,24 +11,22 @@ describe PageObject::Elements::TableRow do
       expect(::PageObject::Elements.element_class_for(:tr)).to eql ::PageObject::Elements::TableRow
     end
     
-    context "for selenium" do
+    context "for watir" do
       it "should return a table cell when indexed" do
-        table_row = PageObject::Elements::TableRow.new(table_row_driver, :platform => :selenium_webdriver)
+        table_row = PageObject::Elements::TableRow.new(table_row_driver, :platform => :watir_webdriver)
         allow(table_row).to receive(:columns).and_return(2)
-        expect(table_row_driver).to receive(:find_elements).with(:xpath, ".//child::td|th").and_return(table_cell)
-        expect(table_cell).to receive(:[]).and_return(table_cell)
+        expect(table_row_driver).to receive(:[]).and_return(table_cell)
         expect(table_row[0]).to be_instance_of PageObject::Elements::TableCell
       end
 
       it "should retrun the number of columns" do
-        table_row = PageObject::Elements::TableRow.new(table_row_driver, :platform => :selenium_webdriver)
-        expect(table_row_driver).to receive(:find_elements).with(:xpath, ".//child::td|th").and_return(table_row_driver)
-        expect(table_row_driver).to receive(:size).and_return(3)
+        table_row = PageObject::Elements::TableRow.new(table_row_driver, :platform => :watir_webdriver)
+        expect(table_row).to receive(:columns).and_return(3)
         expect(table_row.columns).to eql 3
       end
 
       it "should iterate over the table columns" do
-        table_row = PageObject::Elements::TableRow.new(table_row_driver, :platform => :selenium_webdriver)
+        table_row = PageObject::Elements::TableRow.new(table_row_driver, :platform => :watir_webdriver)
         expect(table_row).to receive(:columns).and_return(2)
         allow(table_row).to receive(:[]).and_return(table_row_driver)
         count = 0

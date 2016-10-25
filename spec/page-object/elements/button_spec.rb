@@ -39,24 +39,24 @@ describe PageObject::Elements::Button do
       expect(::PageObject::Elements.element_class_for(:input, :reset)).to eql ::PageObject::Elements::Button
     end
 
-    context "for selenium" do
+    context "for watir" do
       it "should return error when asked for its' text" do
-        button = PageObject::Elements::Button.new(button_element, :platform => :selenium_webdriver)
+        button = PageObject::Elements::Button.new(button_element, :platform => :watir_webdriver)
         expect(lambda { button.text }).to raise_error
       end
 
       it "should return text for a button tag button" do
         allow(button_element).to receive(:tag_name).and_return('button')
         allow(button_element).to receive(:text).and_return('button?')
-        button = PageObject::Elements::Button.new(button_element, :platform => :selenium_webdriver)
+        button = PageObject::Elements::Button.new(button_element, :platform => :watir_webdriver)
         expect(button.text).to eq 'button?'
       end
 
       it "should return text for an input tag button" do
         allow(button_element).to receive(:tag_name).and_return('input')
-        allow(button_element).to receive(:attribute).with('value').and_return('button!')
-        button = PageObject::Elements::Button.new(button_element, :platform => :selenium_webdriver)
-        expect(button.text).to eq 'button!'
+        allow(button_element).to receive(:value).and_return('button!')
+        button = PageObject::Elements::Button.new(button_element, :platform => :watir_webdriver)
+        expect(button.value).to eq 'button!'
       end
     end
   end

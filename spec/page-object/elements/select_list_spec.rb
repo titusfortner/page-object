@@ -75,67 +75,39 @@ describe PageObject::Elements::SelectList do
       end
     end
 
-    context "for selenium"  do
-      let(:selenium_sel_list) { PageObject::Elements::SelectList.new(sel_list, :platform => :selenium_webdriver) }
+    context "for watir"  do
+      let(:watir_sel_list) { PageObject::Elements::SelectList.new(sel_list, :platform => :watir_webdriver) }
 
       it "should return an option when indexed" do
-        expect(sel_list).to receive(:find_elements).with(:xpath, ".//child::option").and_return(opts)
-        expect(selenium_sel_list[1]).to be_instance_of PageObject::Elements::Option
+        allow(sel_list).to receive(:options).and_return(opts)
+        expect(watir_sel_list[1]).to be_instance_of PageObject::Elements::Option
       end
 
       it "should return an array of options" do
-        expect(sel_list).to receive(:find_elements).with(:xpath, ".//child::option").and_return(opts)
-        expect(selenium_sel_list.options.size).to eql 2
+        allow(sel_list).to receive(:options).and_return(opts)
+        expect(watir_sel_list.options.size).to eql 2
       end
 
       it "should select an element" do
-        option = double('option')
-        expect(sel_list).to receive(:find_elements).with(:xpath, ".//child::option").and_return([option])
-        expect(option).to receive(:text).and_return('something')
-        expect(option).to receive(:click)
-        selenium_sel_list.select 'something'
+        expect(sel_list).to receive(:select).and_return('something')
+        watir_sel_list.select 'something'
       end
 
       it "should return an array of selected options" do
-        expect(sel_list).to receive(:find_elements).with(:xpath, ".//child::option").and_return(opts)
         expect(opts[0]).to receive(:selected?).and_return(true)
         expect(opts[0]).to receive(:text).and_return('test1')
         expect(opts[1]).to receive(:selected?).and_return(false)
-        selected = selenium_sel_list.selected_options
-        expect(selected.size).to eql 1
-        expect(selected[0]).to eql 'test1'
-      end
-
-      it "should return an array of selected options" do
-        expect(sel_list).to receive(:find_elements).with(:xpath, ".//child::option").and_return(opts)
-        expect(opts[0]).to receive(:selected?).and_return(true)
-        expect(opts[0]).to receive(:attribute).and_return('test1')
-        expect(opts[1]).to receive(:selected?).and_return(false)
-        selected = selenium_sel_list.selected_values
+        expect(sel_list).to receive(:selected_options).and_return(opts.select!(&:selected?))
+        expect(opts).to receive(:map).and_return(opts.map(&:text))
+        selected = watir_sel_list.selected_options
         expect(selected.size).to eql 1
         expect(selected[0]).to eql 'test1'
       end
 
       it "should know if it includes some value" do
-        expect(sel_list).to receive(:find_elements).and_return(opts)
+        expect(sel_list).to receive(:options).and_return(opts)
         expect(opts[0]).to receive(:text).and_return('blah')
-        expect(selenium_sel_list).to include 'blah'
-      end
-
-      it "should know if an option is selected" do
-        expect(sel_list).to receive(:find_elements).and_return(opts)
-        expect(opts[0]).to receive(:selected?).twice.and_return(true)
-        expect(opts[0]).to receive(:text).and_return('blah')
-        expect(selenium_sel_list.selected?('blah')).to be true
-      end
-
-      it "should be able to clear selected options" do
-        expect(sel_list).to receive(:find_elements).and_return(opts)
-        opts.each do |opt|
-          expect(opt).to receive(:selected?).and_return(true)
-          expect(opt).to receive(:click)
-        end
-        selenium_sel_list.clear
+        expect(watir_sel_list.options.map(&:text)).to include 'blah'
       end
     end
   end

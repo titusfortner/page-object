@@ -26,12 +26,11 @@ describe PageObject::Elements::TextArea do
       expect(::PageObject::Elements.element_class_for(:textarea)).to eql ::PageObject::Elements::TextArea
     end
     
-    context "for Selenium" do
+    context "for watir" do
       it "should set its' value" do
         text_area_element = double('text_area')
-        text_area = PageObject::Elements::TextArea.new(text_area_element, :platform => :selenium_webdriver)
-        expect(text_area_element).to receive(:clear)
-        expect(text_area_element).to receive(:send_keys).with('Joseph')
+        text_area = PageObject::Elements::TextArea.new(text_area_element, :platform => :watir_webdriver)
+        expect(text_area_element).to receive(:set).with('Joseph')
         text_area.value = 'Joseph'
       end
     end

@@ -27,12 +27,12 @@ describe PageObject::Elements::FileField do
     it "should register as type :file" do
       expect(::PageObject::Elements.element_class_for(:input, :file)).to eql ::PageObject::Elements::FileField
     end
-    
-    context "for selenium" do
+
+    context "for watir" do
       it "should set its' value" do
-        selenium_file_field = PageObject::Elements::FileField.new(filefield, :platform => :selenium_webdriver)
-        expect(filefield).to receive(:send_keys).with('a file')
-        selenium_file_field.value = 'a file'
+        watir_file_field = PageObject::Elements::FileField.new(filefield, :platform => :watir_webdriver)
+        expect(filefield).to receive(:set).with('a file')
+        watir_file_field.value = 'a file'
       end
     end
   end

@@ -51,21 +51,21 @@ describe PageObject::Elements::UnorderedList do
       end
     end
 
-    context "for selenium" do
+    context "for watir" do
       it "should return a list item when indexed" do
-        ul = PageObject::Elements::UnorderedList.new(ul_element, :platform => :selenium_webdriver)
-        expect(ul_element).to receive(:find_elements).and_return([ul_element, ul_element])
+        ul = PageObject::Elements::UnorderedList.new(ul_element, :platform => :watir_webdriver)
+        expect(ul_element).to receive(:uls).and_return([ul_element, ul_element])
         ul[1]
       end
 
       it "should know how many items it contains" do
-        ul = PageObject::Elements::UnorderedList.new(ul_element, :platform => :selenium_webdriver)
-        expect(ul_element).to receive(:find_elements).and_return([ul_element])
+        ul = PageObject::Elements::UnorderedList.new(ul_element, :platform => :watir_webdriver)
+        expect(ul_element).to receive(:uls).and_return([ul_element])
         expect(ul.items).to eql 1
       end
 
       it "should know how to iterate over the items" do
-        ul = PageObject::Elements::UnorderedList.new(ul_element, :platform => :selenium_webdriver)
+        ul = PageObject::Elements::UnorderedList.new(ul_element, :platform => :watir_webdriver)
         expect(ul).to receive(:items).and_return(5)
         allow(ul).to receive(:[])
         count = 0

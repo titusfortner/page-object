@@ -39,9 +39,9 @@ describe PageObject::Elements::Link do
       expect(::PageObject::Elements.element_class_for(:a)).to eql ::PageObject::Elements::Link
     end
 
-    context "for selenium" do
+    context "for watir" do
       it "should return error when asked for its' value" do
-        link = PageObject::Elements::Link.new(link_element, :platform => :selenium_webdriver)
+        link = PageObject::Elements::Link.new(link_element, :platform => :watir_webdriver)
         expect(lambda { link.value }).to raise_error
       end
     end

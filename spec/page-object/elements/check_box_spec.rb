@@ -21,28 +21,26 @@ describe PageObject::Elements::CheckBox do
   
   describe "interface" do
     let(:check_box) { double('check_box') }
-    let(:selenium_cb) { PageObject::Elements::CheckBox.new(check_box, :platform => :selenium_webdriver) }
+    let(:watir_cb) { PageObject::Elements::CheckBox.new(check_box, :platform => :watir_webdriver) }
 
     it "should register with type :checkbox" do
       expect(::PageObject::Elements.element_class_for(:input, :checkbox)).to eql ::PageObject::Elements::CheckBox
     end
-    
-    context "for selenium" do
+
+    context "for watir" do
       it "should check" do
-        expect(check_box).to receive(:click)
-        expect(check_box).to receive(:selected?).and_return(false)
-        selenium_cb.check
+        expect(check_box).to receive(:set)
+        watir_cb.check
       end
 
       it "should uncheck" do
-        expect(check_box).to receive(:click)
-        expect(check_box).to receive(:selected?).and_return(true)
-        selenium_cb.uncheck
+        expect(check_box).to receive(:clear)
+        watir_cb.uncheck
       end
-      
+
       it "should know if it is checked" do
-        expect(check_box).to receive(:selected?).and_return(true)
-        expect(selenium_cb).to be_checked
+        expect(check_box).to receive(:set?).and_return(true)
+        expect(watir_cb).to be_checked
       end
     end
   end
