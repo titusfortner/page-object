@@ -48,6 +48,5 @@ Label Link ListItem Option Paragraph RadioButton Span TableCell TextArea TextFie
     ::PageObject::Elements.type_to_class[:password] = ::PageObject::Elements::TextField
     ::PageObject::Elements.type_to_class[:video] = ::PageObject::Elements::Video
 
-
   end
 end
